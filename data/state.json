@@ -1,0 +1,145 @@
+{
+  "experiment": "token-efficiency",
+  "created": "2026-08-31",
+  "spec_frozen": true,
+  "runs": [
+    {
+      "id": "01-control",
+      "models": "fable (xhigh)",
+      "status": "done",
+      "date": "2026-09-01",
+      "total_tokens": 36290481,
+      "criteria_met": 9,
+      "notes": "Fable xhigh solo, 3h04m wall-clock, 12 steering msgs; 1 build only (spec wants >=2); no tests",
+      "effectiveness": 4.5,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer"
+    },
+    {
+      "id": "02-orchestrate",
+      "models": "fable orchestrator + sonnet workers",
+      "status": "done",
+      "date": "2026-09-01",
+      "total_tokens": 36564205,
+      "criteria_met": 7,
+      "notes": "Fable orchestrator + 10 Sonnet cloud fires UNCOUNTED (usage hook never landed, user waived); weekly delta invalid (reset mid-run, >=14 pts); catalog 156 items, no ability names, 1 build; 14h52m",
+      "effectiveness": 2.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-r02"
+    },
+    {
+      "id": "03-new-orchestrate",
+      "models": "fable meta + opus orchestrator + sonnet workers",
+      "status": "done",
+      "date": "2026-09-01",
+      "total_tokens": 122376318,
+      "criteria_met": 9,
+      "notes": "Fable->Opus->Sonnet, 4h18m, 11 steering msgs; 4 builds, 99 tests; horizontal overflow at 390px (P11 unfinished); subagent output tokens estimated from content",
+      "effectiveness": 3.5,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-03"
+    },
+    {
+      "id": "04-fable51-oob",
+      "models": "claude-fable-5-1[1m] (global settings default: xhigh)",
+      "status": "done",
+      "date": "2026-09-02",
+      "total_tokens": 22422601,
+      "criteria_met": null,
+      "notes": "Fable 5.1 out of box: no flags, no skills, no .claude dir. Same paste as 01. 22.4M tokens, 5.84M FE (~7.8 pts predicted; +10 observed, polluted).",
+      "effectiveness": 4.5,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-04"
+    },
+    {
+      "id": "05-orchestrate-v2",
+      "models": "fable + workflow-orchestrate (build-waves Workflow -> sonnet workers/integrator, cond. sonnet auditor)",
+      "status": "done",
+      "date": "2026-09-02",
+      "total_tokens": 24065857,
+      "criteria_met": null,
+      "notes": "Skill workflow-orchestrate frozen 2026-09-02 after 6-pass review (minor fixes applied). METHODS.md 05 block filled in. 24.1M tokens, 4.98M FE (~6.6 pts predicted; +13 observed, polluted). Resumed 09-03 morning.",
+      "effectiveness": 2.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-v2"
+    },
+    {
+      "id": "06-codex",
+      "models": "codex CLI out-of-box (gpt-5.6-terra, config.toml default reasoning effort) \u2014 record resolved model/effort at launch",
+      "status": "done",
+      "date": "2026-09-02",
+      "total_tokens": 32682160,
+      "criteria_met": null,
+      "notes": "Different tool entirely: OpenAI Codex CLI, not Claude Code. No shared quota with the Claude weekly /usage cap -- comparability axis is token totals + est. $ cost via codex-tally.py, not criteria-met-per-usage-point. Folded into phase 2 analysis (with 04, 05) per user decision 2026-09-02. Resolved gpt-5.6-sol. 32.7M total across WSL (2.9M) + Windows Codex (29.8M incl. 15.2M codex-auto-review). codex-tally.py misses the Windows store.",
+      "effectiveness": 3.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-codex"
+    },
+    {
+      "id": "07-sonnet-low",
+      "models": "claude-sonnet-5 (--model fable --effort low requested; resolved model was sonnet-5, not fable)",
+      "status": "done",
+      "date": "2026-09-04",
+      "total_tokens": 32670598,
+      "criteria_met": null,
+      "notes": "Set up as 07-fable51-low to isolate effort level against 04 (same model, xhigh vs low), but the run actually resolved to claude-sonnet-5 at low effort, not Fable 5.1 -- --model fable did not pin the model as expected. Renamed run dir/id to 07-sonnet-low to match what actually ran. Does NOT isolate effort vs 04 (different model); it's a new datapoint: sonnet-5 low effort, solo, bare setup (no skills, no .claude dir). 352 calls, 112,326 output, 32,110,827 cache_read, 446,741 cache_write tokens, ~$9.14 est. Weekly delta ~0.0pts (5h max 7%).",
+      "effectiveness": 5.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimize-07"
+    },
+    {
+      "id": "08-fable51-low",
+      "models": "claude-fable-5-1[1m] (--model fable --effort low, forced)",
+      "status": "done",
+      "date": "2026-09-04",
+      "total_tokens": 14337047,
+      "criteria_met": null,
+      "notes": "Redo of 07's original intent after 07 turned out to resolve to sonnet-5 instead of Fable. Isolates effort level against 04 (same model, xhigh vs low) IF the resolved model matches this time -- verify via tally.py's per-model table before closing out. Run dir clean, no .claude, preflight tally should confirm no transcripts. CLOSED 2026-09-04: resolved model confirmed claude-fable-5-1; 14.34M tokens; +3 weekly pts; scored 5/5 (Jaxon).",
+      "effectiveness": 5.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-fable"
+    },
+    {
+      "id": "09-astra",
+      "models": "gpt-6-astra via OpenAI Codex",
+      "status": "done: effectiveness scored, usage tallied",
+      "date": "2026-09-06",
+      "total_tokens": 15274096,
+      "criteria_met": null,
+      "notes": "Completed and scored by Jaxon on 2026-09-06: effectiveness 4.5/5. Hit the usage cap 2 times during this run (user-reported). App deployed to GitHub Pages. Additional 30-match benchmarks: Deathy's Lash 75% agreement, Zergggy's Mina 75%. Token snapshot through 2026-09-06T21:19:03.031Z: 15,274,096 total (15,185,824 input, including 14,553,600 cached; 88,272 output, including 15,198 reasoning), one GPT-6 Astra session; includes report/accounting work through snapshot. Cost unknown; no shared quota with Claude weekly cap, so comparison remains on tokens + cost rather than Claude weekly percentage. Revised comparison: 37 weekly points on $20 normalized to 7.4 points at $100; see quota_comparison and TOKEN-COMPARISON.md.",
+      "effectiveness": 4.5,
+      "usage_cap_hits": 2,
+      "quota_comparison": {
+        "method": "Observed weekly delta multiplied by plan price / 100; assumed linear price scaling",
+        "plan_usd": 20,
+        "reference_plan_usd": 100,
+        "weekly_before": 33,
+        "weekly_after": 70,
+        "weekly_delta_points": 37,
+        "normalized_weekly_points": 7.4,
+        "effectiveness_per_normalized_point": 0.6081081081081081,
+        "fable_raw_token_equivalent": 29838839.933333337,
+        "weighted_fe_token_equivalent": 5525333.333333333,
+        "caveat": "Rounded account-wide readings; earliest in-session baseline; report work included; unrelated usage not isolated; no observed weekly reset"
+      },
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-astra"
+    },
+    {
+      "id": "10-qwen-claude",
+      "models": "qwen3.5-9b-claude (local Ollama, via Claude Code --model qwen3.5-9b-claude --effort low)",
+      "status": "done: abandoned, nothing workable",
+      "date": null,
+      "total_tokens": null,
+      "criteria_met": 0,
+      "notes": "Local model run: Claude Code driving a locally-hosted Ollama qwen3.5-9b-claude model (7.5GB tag, imported <1h before setup), forced effort low. No Claude account quota/cost involved (local inference) -- like 06/09, comparability is tokens (+ any local wall-clock/hardware notes) rather than the weekly-% metric. Run dir clean, no .claude, bare setup (no skills). Confirm the resolved model id in tally.py's per-model table before scoring -- verify --model actually pinned to qwen and didn't silently fall back (as happened in 07). CLOSED: local qwen3.5-9b via Claude Code could not produce a workable app; Jaxon gave up. Effectiveness 0/5.",
+      "effectiveness": 0.0,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-qwen"
+    },
+    {
+      "id": "11-qwen-opencode",
+      "models": "qwen3.5-9b (local Ollama) via OpenCode",
+      "status": "done: failed to run",
+      "date": null,
+      "total_tokens": null,
+      "criteria_met": 0,
+      "effectiveness": 0.0,
+      "notes": "Local qwen3.5-9b via OpenCode. Never produced a run at all: total failure to get going. No repo, no tokens. Effectiveness 0/5.",
+      "repo": null
+    }
+  ],
+  "phase": 5,
+  "phase_note": "Phase 1 (runs 01-03) analysed 2026-09-01/02. Runs 04-06 added 2026-09-02 (06 folded into phase 2 on 2026-09-02); analysis pass after 04, 05 AND 06 all close. Scorer knows phase-1 results (bias, see PROTOCOL.md amendment). 06 uses a different metric (tokens + $ cost, not weekly-%) -- see PROTOCOL.md amendment. Phase-2 usage report written 2026-09-03 (TOKEN-COMPARISON.md); 04/05 snapshot deltas polluted by other sessions, ranked on FE tokens instead. Quality scoring for 04-06 still pending. Effectiveness scores (1-5) added 2026-09-03; 04 wins on effectiveness per weekly pt (0.58), 01 second (0.50). Phase 3 (run 07) added 2026-09-04, not yet launched -- see METHODS.md/RUNBOOK.md amendments. Phase 5 (run 09) added 2026-09-05: GPT Astra via Codex CLI, folded onto the same tokens+cost axis as 06 -- see METHODS.md/RUNBOOK.md amendments. Completed 2026-09-06; Jaxon effectiveness 4.5/5, usage cap hit twice, 15,274,096 recorded tokens through 2026-09-06T21:19:03.031Z.",
+  "all_runs_closed": "2026-09-15"
+}
