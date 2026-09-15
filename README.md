@@ -44,18 +44,24 @@ original `~/.claude/projects` transcripts, not included here — see
 
 ## Verdict
 
-01 (Fable 5, high) and 03 (three-layer meta-orchestration) land at almost
-the same FE cost (~6.5–6.7M) — orchestration here added no efficiency and
-cost real quality (03 scored 3.5/5 vs 01's 4.5/5). 02 (Cloud Routines
-orchestration) and 05 (Workflows orchestration) both scored 2/5:
-orchestration overhead bought nothing on this spec, and both scored worse
-than solo runs at similar or lower cost. Low-effort solo runs did best per
-token: 07 (Sonnet, low) scored 5/5 at 0.91M FE, and 08 (Fable 5.1, low)
-scored 5/5 at 2.88M FE — both roughly matching or beating the 4.5/5 solo
-high-effort runs at a fraction of the cost. Astra (Codex, high effort)
-scored 4.5/5 at ~5.5M FE-equivalent, competitive with the best Claude
-runs. The local 9B model (10, 11) could not produce a workable app by
-either tool — a real result, not missing data.
+**Low effort won, by a wide margin.** 07 (Sonnet, low effort) is the best
+result in the experiment: 5/5 effectiveness at 0.91M FE — about an eighth
+the cost of any high-effort solo run. 08 (Fable 5.1, low effort) is
+second: also 5/5, at 2.88M FE, still a fraction of the high-effort runs.
+09 (Codex Astra, high effort) is third: 4.5/5 at an estimated 5.53M
+FE-equivalent — competitive with the best Claude high-effort runs, but
+nowhere near 07 or 08 on cost. Turning effort down beat every other
+variable tested in this experiment, including model choice and
+orchestration structure.
+
+Everything else is a distant second to that finding. 01 (Fable 5, high)
+and 03 (three-layer meta-orchestration) land at almost the same FE cost
+(~6.5–6.7M) — orchestration here added no efficiency and cost real
+quality (03 scored 3.5/5 vs 01's 4.5/5). 02 (Cloud Routines orchestration)
+and 05 (Workflows orchestration) both scored 2/5: orchestration overhead
+bought nothing on this spec, and both scored worse than solo runs at
+similar or lower cost. The local 9B model (10, 11) could not produce a
+workable app by either tool — a real result, not missing data.
 
 ## Caveats
 

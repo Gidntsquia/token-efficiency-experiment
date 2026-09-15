@@ -1,4 +1,4 @@
-# How much does orchestration actually cost?
+# Low effort beat everything else
 
 I built the same small app 11 times. Same spec, same acceptance
 criteria, different approach each time: a single high-effort model
@@ -8,11 +8,13 @@ workers via Cloud Routines, the same via a Workflow, and a three-layer
 Fable→Opus→Sonnet chain), two runs on OpenAI's Codex CLI, and two
 attempts with a local 9B model. The question was simple: for a fixed
 task, how much does approach change the tokens spent and the quality
-delivered? The honest answer turned out to be more useful than a clean
-one — the biggest single caveat (that the primary cost metric is a
-list-price proxy, not a bill) matters as much as the headline result
-(orchestration cost nothing and lost quality; low-effort solo runs
-scored just as well for a fraction of the cost).
+delivered? The headline result is that turning effort down beat every
+other variable tested: Sonnet at low effort was the best result in the
+whole experiment, Fable 5.1 at low effort was second, and Codex Astra at
+high effort was third — model choice and orchestration structure came in
+a distant fourth. The biggest caveat (the primary cost metric is a
+list-price proxy, not a bill) still matters and is covered below, but it
+doesn't change that ranking.
 
 **Why this is hard to measure.** The obvious metric — Anthropic's weekly
 usage percentage — turned out to be almost unusable. It's reported in
@@ -43,24 +45,29 @@ scored 1–5 by hand against the spec's acceptance criteria, by one rater,
 after each build. Full method, protocol, and spec are in this repo's
 `docs/`.
 
-**Results.** Solo runs at high effort landed within noise of each other
-regardless of orchestration: Fable 5 solo (01) cost 6.72M FE and scored
-4.5/5; the three-layer Fable→Opus→Sonnet orchestration (03) cost 6.47M
-FE — nearly identical — and scored only 3.5/5. Both orchestration
-structures that used worker dispatch scored worse still: Cloud Routines
-orchestration (02) and Workflow orchestration (05) both scored 2/5, at
-6.67M and 4.98M FE respectively. Orchestration, in other words, didn't
-buy efficiency on this task, and in three of three orchestrated runs it
-cost quality. The best result by a wide margin came from turning effort
-down, not adding structure: Sonnet at low effort (07) scored a full 5/5
-at 0.91M FE — about an eighth of the solo-high-effort cost — and Fable
-5.1 at low effort (08) also scored 5/5, at 2.88M FE. Fable 5.1 at high
+**Results.** The best result in the whole experiment was Sonnet at low
+effort (07): a full 5/5 at 0.91M FE — about an eighth of the cost of any
+high-effort solo run. Fable 5.1 at low effort (08) was second: also
+5/5, at 2.88M FE, still a fraction of the high-effort cost. Third was
+Codex Astra at high effort (09): 4.5/5 at an estimated 5.53M
+FE-equivalent quota contribution — competitive with the best Claude
+high-effort runs, though that number isn't directly comparable to a
+token price, and nowhere near 07 or 08 on cost. Turning effort down beat
+every other variable tested here, including model and orchestration
+choice.
+
+Everything else trails a distant fourth. Solo runs at high effort landed
+within noise of each other regardless of orchestration: Fable 5 solo
+(01) cost 6.72M FE and scored 4.5/5; the three-layer Fable→Opus→Sonnet
+orchestration (03) cost 6.47M FE — nearly identical — and scored only
+3.5/5. Both orchestration structures that used worker dispatch scored
+worse still: Cloud Routines orchestration (02) and Workflow
+orchestration (05) both scored 2/5, at 6.67M and 4.98M FE respectively.
+Orchestration, in other words, didn't buy efficiency on this task, and
+in three of three orchestrated runs it cost quality. Fable 5.1 at high
 effort out of the box (04) matched 01's quality at 5.84M FE, a modest
-13% saving over the older Fable 5. On the Codex side, gpt-6-astra at
-high effort (09) scored 4.5/5 at an estimated 5.53M FE-equivalent quota
-contribution — competitive with the best Claude runs, though that
-number isn't directly comparable to a token price. gpt-5.6-sol at low
-effort (06) scored lower (3/5) despite using more than double Astra's
+13% saving over the older Fable 5. gpt-5.6-sol at low effort (06) scored
+lower (3/5) despite using more than double Astra's
 raw tokens (32.68M vs 15.27M), because it consumed roughly 6.6× less
 weekly quota per token — a reminder that raw token counts and quota
 consumption aren't the same axis. The two local-model runs (10, 11), a
