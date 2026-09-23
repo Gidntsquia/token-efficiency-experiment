@@ -89,3 +89,13 @@ headline metric; rank it against the others only on criteria-met-per-MTok
 and criteria-met-per-dollar, noted as a separate, non-commensurable
 comparison. Extra bias, same shape as the 04/05 note above: 06 is not blind
 to phase-1 results either.
+
+## Amendment 2026-09-22 — reopened for 12/13-opus55
+
+Experiment was marked `all_runs_closed` 2026-09-15; reopened for two more
+runs (12, 13 — see METHODS.md) to get a first solo Opus 5.5 datapoint.
+Rule 7 ("no mid-experiment analysis") is waived for this reopening the
+same way it was for phase 2/06/09: score 12 and 13 together once both
+close, then fold into README.md. Not blind — scorer has read every prior
+result and the "low effort wins" verdict, same bias shape noted for
+04/05/06/09.

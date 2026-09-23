@@ -240,3 +240,42 @@ directory. Verify every acceptance criterion yourself." After the run,
 `codex-tally.py runs/09-astra` reconstructs the token count from
 `~/.codex/sessions/**/rollout-*.jsonl` the same way it does for 06 — fill
 in `PRICES` for the resolved model before trusting the cost figure.
+
+## Amendment 2026-09-22 — 12/13-opus55 added
+
+Reopens the experiment after `all_runs_closed` (2026-09-15) — first solo
+Claude Code datapoint for Opus 5.5 (only appeared inside 03's
+meta-orchestration chain before). Two runs, closest available analog to
+the 04-vs-08 effort-isolation pair: same model, effort forced low vs left
+at out-of-box default. Same spec wording as 01/04. Note in RESULTS.md
+that this reopens a "closed" experiment and that the scorer is not blind
+(has read every prior result) — same bias shape as the 04/05 and 06/09
+notes above.
+
+## 12-opus55-low — Opus 5.5, effort forced low
+
+No skills, no `.claude/` dir in the run dir — same bare setup as 01/04/08.
+
+```bash
+cd runs/12-opus55-low && claude --model opus --effort low
+```
+
+Paste SPEC.md with the 01/04 wording: "Build this project in the current
+directory. Verify every acceptance criterion yourself." Record the
+resolved model id from the tally's per-model table before scoring — check
+it actually pinned to Opus 5.5 and didn't resolve elsewhere (as happened
+in 07).
+
+## 13-opus55-oob — Opus 5.5, out of box
+
+No flags, no skills, no `.claude/` dir — let `~/.claude/settings.json`
+pick model and effort, same "out of box" premise as 04. Record whatever
+model/effort actually resolves; don't change settings.json between
+launch and scoring.
+
+```bash
+cd runs/13-opus55-oob && claude
+```
+
+Paste SPEC.md with the 01/04 wording: "Build this project in the current
+directory. Verify every acceptance criterion yourself."

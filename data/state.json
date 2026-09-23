@@ -137,9 +137,31 @@
       "effectiveness": 0.0,
       "notes": "Local qwen3.5-9b via OpenCode. Never produced a run at all: total failure to get going. No repo, no tokens. Effectiveness 0/5.",
       "repo": null
+    },
+    {
+      "id": "12-opus55-low",
+      "models": "claude-opus-5-5 (--effort low; transcript effort=low)",
+      "status": "done",
+      "date": "2026-09-23",
+      "total_tokens": 7161010,
+      "criteria_met": null,
+      "notes": "First solo Opus 5.5 datapoint (previously only appeared inside 03's chain). Bare setup, no skills, no .claude dir, same spec paste as 01/04. Pairs with 13 as an 04-vs-08-style effort isolation. Confirm resolved model id from tally.py's per-model table before scoring -- --model flag mis-resolved in run 07. CLOSED 2026-09-23: resolved claude-opus-5-5; 113 calls, 7,161,010 tokens (82,796 out, 6,647,877 cache read, 430,111 1h cache write), est $9.70 = 0.97M FE (~1.3 weekly pts predicted; no /usage snapshot taken). Scored 4.5/5 (Jaxon). Leakage: model realized mid-run it was in an experiment.",
+      "effectiveness": 4.5,
+      "repo": "https://github.com/Gidntsquia/deadlock-build-optimizer-12"
+    },
+    {
+      "id": "13-opus55-oob",
+      "models": "claude-opus-5-5 (out of box; transcript effort=medium despite settings.json effortLevel xhigh)",
+      "status": "done",
+      "date": "2026-09-23",
+      "total_tokens": 14301662,
+      "criteria_met": null,
+      "notes": "Out-of-box counterpart to 12: no flags, no skills, no .claude dir. Record whatever model/effort actually resolves; don't change settings.json between launch and scoring. CLOSED 2026-09-23: resolved claude-opus-5-5 at effort medium; 161 calls, 14,301,662 tokens (174,759 out, 13,484,587 cache read, 641,994 1h cache write), est $17.53 = 1.75M FE (~2.3 weekly pts predicted; no /usage snapshot taken). Scored 5/5 (Jaxon). Leakage: model realized mid-run it was in an experiment. Build not published.",
+      "effectiveness": 5.0,
+      "repo": null
     }
   ],
-  "phase": 5,
-  "phase_note": "Phase 1 (runs 01-03) analysed 2026-09-01/02. Runs 04-06 added 2026-09-02 (06 folded into phase 2 on 2026-09-02); analysis pass after 04, 05 AND 06 all close. Scorer knows phase-1 results (bias, see PROTOCOL.md amendment). 06 uses a different metric (tokens + $ cost, not weekly-%) -- see PROTOCOL.md amendment. Phase-2 usage report written 2026-09-03 (TOKEN-COMPARISON.md); 04/05 snapshot deltas polluted by other sessions, ranked on FE tokens instead. Quality scoring for 04-06 still pending. Effectiveness scores (1-5) added 2026-09-03; 04 wins on effectiveness per weekly pt (0.58), 01 second (0.50). Phase 3 (run 07) added 2026-09-04, not yet launched -- see METHODS.md/RUNBOOK.md amendments. Phase 5 (run 09) added 2026-09-05: GPT Astra via Codex CLI, folded onto the same tokens+cost axis as 06 -- see METHODS.md/RUNBOOK.md amendments. Completed 2026-09-06; Jaxon effectiveness 4.5/5, usage cap hit twice, 15,274,096 recorded tokens through 2026-09-06T21:19:03.031Z.",
-  "all_runs_closed": "2026-09-15"
+  "phase": 6,
+  "phase_note": "Phase 1 (runs 01-03) analysed 2026-09-01/02. Runs 04-06 added 2026-09-02 (06 folded into phase 2 on 2026-09-02); analysis pass after 04, 05 AND 06 all close. Scorer knows phase-1 results (bias, see PROTOCOL.md amendment). 06 uses a different metric (tokens + $ cost, not weekly-%) -- see PROTOCOL.md amendment. Phase-2 usage report written 2026-09-03 (TOKEN-COMPARISON.md); 04/05 snapshot deltas polluted by other sessions, ranked on FE tokens instead. Quality scoring for 04-06 still pending. Effectiveness scores (1-5) added 2026-09-03; 04 wins on effectiveness per weekly pt (0.58), 01 second (0.50). Phase 3 (run 07) added 2026-09-04, not yet launched -- see METHODS.md/RUNBOOK.md amendments. Phase 5 (run 09) added 2026-09-05: GPT Astra via Codex CLI, folded onto the same tokens+cost axis as 06 -- see METHODS.md/RUNBOOK.md amendments. Completed 2026-09-06; Jaxon effectiveness 4.5/5, usage cap hit twice, 15,274,096 recorded tokens through 2026-09-06T21:19:03.031Z. Phase 6 (runs 12-13) added 2026-09-22, reopening the experiment after all_runs_closed (2026-09-15) for a first solo Opus 5.5 datapoint -- see PROTOCOL.md/METHODS.md amendments.",
+  "all_runs_closed": "2026-09-23"
 }
