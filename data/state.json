@@ -156,9 +156,9 @@
       "date": "2026-09-23",
       "total_tokens": 14301662,
       "criteria_met": null,
-      "notes": "Out-of-box counterpart to 12: no flags, no skills, no .claude dir. Record whatever model/effort actually resolves; don't change settings.json between launch and scoring. CLOSED 2026-09-23: resolved claude-opus-5-5 at effort medium; 161 calls, 14,301,662 tokens (174,759 out, 13,484,587 cache read, 641,994 1h cache write), est $17.53 = 1.75M FE (~2.3 weekly pts predicted; no /usage snapshot taken). Scored 5/5 (Jaxon). Leakage: model realized mid-run it was in an experiment. Build not published.",
+      "notes": "Out-of-box counterpart to 12: no flags, no skills, no .claude dir. Record whatever model/effort actually resolves; don't change settings.json between launch and scoring. CLOSED 2026-09-23: resolved claude-opus-5-5 at effort medium; 161 calls, 14,301,662 tokens (174,759 out, 13,484,587 cache read, 641,994 1h cache write), est $17.53 = 1.75M FE (~2.3 weekly pts predicted; no /usage snapshot taken). Scored 5/5 (Jaxon). Leakage: model realized mid-run it was in an experiment. Build published at https://gidntsquia.github.io/token-efficiency-experiment/runs/13-opus55-oob/.",
       "effectiveness": 5.0,
-      "repo": null
+      "repo": "https://github.com/Gidntsquia/token-efficiency-experiment (gh-pages: runs/13-opus55-oob)"
     }
   ],
   "phase": 6,
